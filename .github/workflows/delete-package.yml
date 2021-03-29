@@ -2,8 +2,8 @@ name: Delete Package
 on:
  workflow_dispatch:
   inputs:
-    version:
-      description: 'version of the package to be deleted'     
+    versions:
+      description: 'list of version of the package to be deleted'     
       required: true
 jobs:
   delete-package:

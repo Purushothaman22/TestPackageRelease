@@ -10,8 +10,8 @@ inputs:
   PACKAGE_NAME:
     description: The name of the package.
     required: true
-  VERSION:
-    description: Version of the package to be deleted.
+  VERSIONS:
+    description: List of version of the package to be deleted.
     required: true
   TOKEN:
     description: Auth token with delete permission.

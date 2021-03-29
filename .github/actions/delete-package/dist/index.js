@@ -24,7 +24,7 @@ async function FindAndDeletePackageVersion(org, package_type, package_name, vers
     octokit.hook.after("request", async (response, options) => {
         const version_id = getVersionId(response.data, version);
         if (version_id == null) {
-            throw Error(`Version ${version} not found`);
+            console.log(`Version ${version} not found`);
         } else {
             deletePackageVersion(org, package_type, package_name, version, version_id, token);
         }
@@ -59,7 +59,9 @@ async function deletePackageVersion(org, package_type, package_name, version, ve
 
     // Handle error
     octokit.hook.error("request", async (error, options) => {
-        throw error
+        if (error != null) {
+            console.log(`Unable to delete version ${version}. Error: ${error}`)
+        }
     });
 
     if (org === null || org === "") {
@@ -83,10 +85,12 @@ async function run() {
     var org = core.getInput("ORG");
     var package_type = core.getInput("PACKAGE_TYPE");
     var package_name = core.getInput("PACKAGE_NAME");
-    var version =  core.getInput("VERSION");
+    var versions =  core.getInput("VERSIONS");
     var token = core.getInput("TOKEN");
 
-    FindAndDeletePackageVersion(org, package_type, package_name, version, token)
+    versions.forEach(function(v) {
+        FindAndDeletePackageVersion(org, package_type, package_name, v, token);
+    });
 }
 
 run();
