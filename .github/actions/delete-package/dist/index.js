@@ -85,7 +85,7 @@ async function run() {
     var org = core.getInput("ORG");
     var package_type = core.getInput("PACKAGE_TYPE");
     var package_name = core.getInput("PACKAGE_NAME");
-    var versions =  core.getInput("VERSIONS");
+    var versions =  core.getListInput("VERSIONS");
     var token = core.getInput("TOKEN");
 
     versions.forEach(function(v) {
