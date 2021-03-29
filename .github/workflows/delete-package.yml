@@ -16,5 +16,5 @@ jobs:
         with:
           PACKAGE_TYPE: npm
           PACKAGE_NAME: testpackagerelease
-          VERSION: ${{ github.event.inputs.version }}
+          VERSIONS: ${{ github.event.inputs.version }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
