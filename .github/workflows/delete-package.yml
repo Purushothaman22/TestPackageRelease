@@ -2,19 +2,18 @@ name: Delete Package
 on:
  workflow_dispatch:
   inputs:
-    versions:
-      description: 'list of version of the package to be deleted'     
+    version:
+      description: 'Version of the package to be deleted'     
       required: true
 jobs:
   delete-package:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/actions/delete-package
       - name: Delete package
-        uses: ./.github/actions/delete-package
+        uses: Purushothaman22/delete-gh-package@purushothaman/add-action
         with:
           PACKAGE_TYPE: npm
           PACKAGE_NAME: testpackagerelease
-          VERSIONS: ${{ github.event.inputs.version }}
+          VERSION: ${{ github.event.inputs.version }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
