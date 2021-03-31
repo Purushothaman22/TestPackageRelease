@@ -17,4 +17,4 @@ jobs:
           PACKAGE_TYPE: npm
           REPO: TestPackageRelease
           VERSION: ${{ github.event.inputs.version }}
-          TOKEN: ${{ secrets.TEST_PACKAGE__RELEASE_DELETE_KEY }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
