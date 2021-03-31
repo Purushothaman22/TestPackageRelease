@@ -13,7 +13,8 @@ jobs:
       - name: Delete package
         uses: Purushothaman22/delete-gh-package@purushothaman/add-action
         with:
+          OWNER: Purushothaman22
           PACKAGE_TYPE: npm
-          PACKAGE_NAME: testpackagerelease
+          REPO: TestPackageRelease
           VERSION: ${{ github.event.inputs.version }}
           TOKEN: ${{ secrets.TEST_PACKAGE__RELEASE_DELETE_KEY }}
