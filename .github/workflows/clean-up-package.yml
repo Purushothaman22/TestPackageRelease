@@ -1,0 +1,20 @@
+name: Clean up Package
+on:
+ workflow_dispatch:
+  inputs:
+    number_of_days_old:
+      description: 'Number of days old limit for the packages to be deleted'     
+      required: true
+jobs:
+  delete-package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Delete package
+        uses: Purushothaman22/delete-gh-package@purushothaman/add-action
+        with:
+          OWNER: Purushothaman22
+          PACKAGE_TYPE: npm
+          REPO: TestPackageRelease
+          OLDER_THAN_NUMBER_OF_DAYS: ${{ github.event.inputs.number_of_days_old }}
+          TOKEN: ${{ secrets.TEST_PACKAGE__RELEASE_DELETE_KEY }}
