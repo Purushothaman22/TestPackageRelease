@@ -10,4 +10,4 @@ jobs:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
         continue-on-error: true
       - name: Print ncc 
-        run: /usr/local/bin/ncc version
+        run: ./node_modules/@vercel/ncc/dist/ncc/cli.js version

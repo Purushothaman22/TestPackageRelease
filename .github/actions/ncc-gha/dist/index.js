@@ -19,8 +19,8 @@ async function run() {
 
     try {
         await exec.exec('npm install');
-        await exec.exec('npm i -g @vercel/ncc');
-        await exec.exec('/usr/local/bin/ncc', ['build', mainFilePath, '--license', 'licenses.txt']);
+        await exec.exec('npm i @vercel/ncc');
+        await exec.exec('./node_modules/@vercel/ncc/dist/ncc/cli.js', ['build', mainFilePath, '--license', 'licenses.txt']);
     
         // check for git diff
         const diff = await exec.exec(
