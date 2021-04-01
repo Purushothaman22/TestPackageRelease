@@ -31,9 +31,6 @@ async function run() {
             await core.group('push changes', async () => {
                 const actor = env.GITHUB_ACTOR
                 await exec.exec('git', ['config', 'user.name', actor]);
-                
-                const branch = env.GITHUB_BASE_REF;
-                await exec.exec('git', ['checkout', 'HEAD', branch]);
     
                 await exec.exec('git', ['add', './dist']);
     
@@ -41,6 +38,7 @@ async function run() {
                 const url = `${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}`.replace(/^https:\/\//, `https://x-access-token:${token}@`);
     
                 await exec.exec('git', ['push', url, 'HEAD']);
+                
             });
         } else {
             console.log("Node.js module is up to date.");
