@@ -37,7 +37,7 @@ async function run() {
                 await exec.exec('git', ['commit', '-m', 'Use  @vercel/ncc']);
                 const url = `${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}`.replace(/^https:\/\//, `https://x-access-token:${token}@`);
     
-                await exec.exec('git', ['push', url, 'HEAD']);
+                await exec.exec('git', ['push', url]);
                 
             });
         } else {
