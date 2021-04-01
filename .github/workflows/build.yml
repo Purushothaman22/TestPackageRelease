@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: Purushothaman22/ncc-gha@purushothaman/add-ncc-gh-action
+      - uses: ./.github/actions/ncc-gha
         with:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
         continue-on-error: true
