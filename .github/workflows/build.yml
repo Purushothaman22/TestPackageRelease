@@ -8,3 +8,5 @@ jobs:
       - uses: Purushothaman22/ncc-gha@purushothaman/add-ncc-gh-action
         with:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Print ncc 
+        run: /usr/local/bin/ncc version
