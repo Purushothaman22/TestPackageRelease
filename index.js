@@ -1,4 +1,7 @@
-alert("Hello, World!");
+const core = require('@actions/core');
+const token = core.getInput('TOKEN');
+
+console.log(token);
 
 var g1 = new Date("2021-03-26T11:15:58Z");
 console.log(`g1: ${g1.getDate()}`);
