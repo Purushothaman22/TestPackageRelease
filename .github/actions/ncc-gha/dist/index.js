@@ -21,10 +21,10 @@ async function run() {
 
     try {
         const url = `${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}`.replace(/^https:\/\//, `https://x-access-token:${token}@`);
-        await exec.exec('git',['fetch', url])
+        await exec.exec('git branch')
 
-        const branch = github.context.payload.pull_request.head.ref;
-        await exec.exec('git', ['checkout', 'HEAD', branch]);
+        // const branch = github.context.payload.pull_request.head.ref;
+        // await exec.exec('git', ['checkout', 'HEAD', branch]);
 
         await exec.exec('npm install');
         await exec.exec('npm i @vercel/ncc');
@@ -34,7 +34,7 @@ async function run() {
         const diff = await exec.exec(
             'git', ['diff', '--quiet'], {ignoreReturnCode: true}
         );
-    
+
         if (diff) {
             await core.group('push changes', async () => {
                 const actor = env.GITHUB_ACTOR
@@ -45,7 +45,7 @@ async function run() {
                 await exec.exec('git', ['commit', '-m', 'Use  @vercel/ncc']);
                 const url = `${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}`.replace(/^https:\/\//, `https://x-access-token:${token}@`);
     
-                await exec.exec('git', ['push', url, 'HEAD']);
+                await exec.exec('git', ['push', url]);
 
             });
         } else {
