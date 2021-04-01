@@ -11,10 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Delete package
-        uses: Purushothaman22/delete-gh-package@purushothaman/add-action
+        uses: gps/delete-gh-package@master
         with:
-          OWNER: Purushothaman22
           PACKAGE_TYPE: npm
-          REPO: TestPackageRelease
           VERSION: ${{ github.event.inputs.version }}
-          TOKEN: ${{ secrets.TEST_PACKAGE__RELEASE_DELETE_KEY }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}

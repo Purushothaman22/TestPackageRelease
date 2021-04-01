@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/Purushothaman22/TestPackageRelease/issues"
   },
-  "homepage": "https://github.com/Purushothaman22/TestPackageRelease#readme"
+  "homepage": "https://github.com/Purushothaman22/TestPackageRelease#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@vercel/ncc": "^0.27.0"
+  }
 }
