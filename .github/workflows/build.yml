@@ -8,6 +8,3 @@ jobs:
       - uses: ./.github/actions/ncc-gha
         with:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        continue-on-error: true
-      - name: Print ncc 
-        run: ./node_modules/@vercel/ncc/dist/ncc/cli.js version
