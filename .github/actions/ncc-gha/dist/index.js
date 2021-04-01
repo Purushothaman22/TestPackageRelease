@@ -32,8 +32,8 @@ async function run() {
                 const actor = env.GITHUB_ACTOR
                 await exec.exec('git', ['config', 'user.name', actor]);
                 
-                const branch = env.GITHUB_REF;
-                await exec.exec('git', ['checkout', 'HEAD', '-b', branch]);
+                const branch = env.GITHUB_BASE_REF;
+                await exec.exec('git', ['checkout', 'HEAD', branch]);
     
                 await exec.exec('git', ['add', './dist']);
     
