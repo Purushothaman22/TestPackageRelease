@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Delete package
-        uses: Purushothaman22/delete-gh-package@purushothaman/add-action
+        uses: gps/delete-gh-package@master
         with:
           PACKAGE_TYPE: npm
           VERSION: ${{ github.event.inputs.version }}
