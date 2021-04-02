@@ -30,7 +30,7 @@ async function run() {
         console.log(`branch: ${branch}`)
         await exec.exec('git', 'fetch', url)
         await exec.exec('git', 'checkout', branch)
-        await exec.exec('git', ['pull', '--ff-only', url, `${branch}`]);
+        await exec.exec('git', ['pull', '--ff-only', url, `${branch}`, '--allow-unrelated-histories']);
         await exec.exec('npm install');
         await exec.exec('npm i @vercel/ncc');
         await exec.exec('./node_modules/@vercel/ncc/dist/ncc/cli.js', ['build', mainFilePath, '--license', 'licenses.txt']);
