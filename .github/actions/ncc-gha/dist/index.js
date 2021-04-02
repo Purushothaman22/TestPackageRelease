@@ -27,8 +27,9 @@ async function run() {
         const dir = './dist';
         const distAlreadyExist = fs.existsSync(dir);
         const url = `${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}`.replace(/^https:\/\//, `https://x-access-token:${token}@`);
+        console.log(`branch: ${branch}`)
         await exec.exec('git', 'checkout', branch)
-        await exec.exec('git', ['pull', '--ff-only', url, `HEAD:${branch}`]);
+        await exec.exec('git', ['pull', '--ff-only', url, `${branch}`]);
         await exec.exec('npm install');
         await exec.exec('npm i @vercel/ncc');
         await exec.exec('./node_modules/@vercel/ncc/dist/ncc/cli.js', ['build', mainFilePath, '--license', 'licenses.txt']);
@@ -48,7 +49,7 @@ async function run() {
     
                 await exec.exec('git', ['commit', '-m', 'Use  @vercel/ncc']);
                 
-                await exec.exec('git', ['push', url, `HEAD:${branch}`]);
+                await exec.exec('git', ['push', url, branch]);
 
             });
         } else {
