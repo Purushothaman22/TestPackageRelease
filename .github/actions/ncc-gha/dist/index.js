@@ -49,7 +49,7 @@ async function run() {
     
                 await exec.exec('git', ['commit', '-m', 'Use  @vercel/ncc']);
                 
-                await exec.exec('git', ['push', url, branch]);
+                await exec.exec('git', ['push', branch, url]);
 
             });
         } else {
