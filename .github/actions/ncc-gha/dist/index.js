@@ -23,12 +23,11 @@ async function run() {
         const url = `${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}`.replace(/^https:\/\//, `https://x-access-token:${token}@`);
         await exec.exec('git branch')
 
-        // const branch = github.context.payload.pull_request.head.ref;
-        // await exec.exec('git', ['checkout', 'HEAD', branch]);
-
         await exec.exec('npm install');
         await exec.exec('npm i @vercel/ncc');
         await exec.exec('./node_modules/@vercel/ncc/dist/ncc/cli.js', ['build', mainFilePath, '--license', 'licenses.txt']);
+        const branch = github.context.payload.pull_request.head.ref;
+        await exec.exec('git',['pull', url, branch])
     
         // check for git diff
         const diff = await exec.exec(
