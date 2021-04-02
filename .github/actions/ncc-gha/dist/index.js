@@ -27,7 +27,7 @@ async function run() {
         await exec.exec('./node_modules/@vercel/ncc/dist/ncc/cli.js', ['build', mainFilePath, '--license', 'licenses.txt']);
         // check for git diff
         const diff = await exec.exec(
-            'git', ['diff', '--quiet'], {ignoreReturnCode: true}
+            'git', ['diff', '--quiet', './dist'], {ignoreReturnCode: true}
         );
 
         if (diff) {
