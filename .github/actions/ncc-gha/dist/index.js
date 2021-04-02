@@ -25,6 +25,7 @@ async function run() {
 
         // directory to check if exists
         const dir = './dist';
+        const distAlreadyExist = fs.existsSync(dir);
         await exec.exec('git', 'checkout', branch)
         await exec.exec('npm install');
         await exec.exec('npm i @vercel/ncc');
@@ -34,7 +35,7 @@ async function run() {
             'git', ['diff', '--quiet', './dist'], {ignoreReturnCode: true}
         );
 
-        if (diff || !fs.existsSync(dir)) {
+        if (diff || !distAlreadyExist) {
             await core.group('push changes', async () => {
                 // await exec.exec('git', ['checkout', 'HEAD', '-b', branch]);
 
