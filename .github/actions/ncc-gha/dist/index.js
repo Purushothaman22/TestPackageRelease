@@ -26,6 +26,7 @@ async function run() {
         // directory to check if exists
         const dir = './dist';
         const distAlreadyExist = fs.existsSync(dir);
+        const url = `${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}`.replace(/^https:\/\//, `https://x-access-token:${token}@`);
         await exec.exec('git', 'checkout', branch)
         await exec.exec('git', ['pull', '--ff-only', url, `HEAD:${branch}`]);
         await exec.exec('npm install');
@@ -46,7 +47,7 @@ async function run() {
                 await exec.exec('git', ['add', './dist']);
     
                 await exec.exec('git', ['commit', '-m', 'Use  @vercel/ncc']);
-                const url = `${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}`.replace(/^https:\/\//, `https://x-access-token:${token}@`);
+                
                 await exec.exec('git', ['push', url, `HEAD:${branch}`]);
 
             });
