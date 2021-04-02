@@ -25,9 +25,8 @@ async function run() {
         const branch = github.context.payload.pull_request.head.ref;
 
         const git = simpleGit();
-        await git.init().addRemote('repo', url);
-        await git.fetch('repo')
-        await git.checkout(`repo/${branch}`)
+        await git.fetch('origin')
+        await git.checkout(`origin/${branch}`)
 
         await exec.exec('npm install');
         await exec.exec('npm i @vercel/ncc');
@@ -46,7 +45,7 @@ async function run() {
                 await exec.exec('git', ['commit', '-m', 'Use  @vercel/ncc']);
                 
 
-                await git.push(`repo/${branch}`);
+                await git.push(`origin/${branch}`);
                 
             });
         } else {
