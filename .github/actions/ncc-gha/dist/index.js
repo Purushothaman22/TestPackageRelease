@@ -26,7 +26,7 @@ async function run() {
 
         const git = simpleGit();
         await git.fetch('origin')
-        await git.checkout(`origin/${branch}`)
+        await git.checkout(branch)
 
         await exec.exec('npm install');
         await exec.exec('npm i @vercel/ncc');
@@ -44,8 +44,7 @@ async function run() {
                 await git.addConfig('user.email', `${env.GITHUB_ACTOR}@users.noreply.github.com`)
                 await git.addConfig('user.name', env.GITHUB_ACTOR)
                 await exec.exec('git', ['commit', '-m', 'Use  @vercel/ncc']);
-                await git.push(`origin/${branch}`);
-                
+                await git.push(`origin ${branch}`);
             });
         } else {
             console.log("Node.js module is up to date.");
