@@ -5,6 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Check branch
+        run: git branch
       - uses: ./.github/actions/ncc-gha
         with:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
