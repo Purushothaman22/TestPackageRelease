@@ -25,7 +25,8 @@ async function run() {
         const branch = github.context.payload.pull_request.head.ref;
 
         const git = simpleGit();
-        await git.fetch('origin')
+        await git.addRemote('repo', url);
+        await git.fetch('repo')
         await git.checkout(branch)
 
         await exec.exec('npm install');
@@ -40,11 +41,11 @@ async function run() {
     
         if (diff) {
             await core.group('push changes', async () => {
-                await exec.exec('git', ['add', './dist']);
                 await git.addConfig('user.email', `${env.GITHUB_ACTOR}@users.noreply.github.com`)
                 await git.addConfig('user.name', env.GITHUB_ACTOR)
-                await exec.exec('git', ['commit', '-m', 'Use  @vercel/ncc']);
-                await git.push(`origin ${branch}`);
+                await git.add('./dist')
+                await git.commit("Use  @vercel/ncc")
+                await git.push('repo', branch);
             });
         } else {
             console.log("Node.js module is up to date.");
