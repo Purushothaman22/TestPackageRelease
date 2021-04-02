@@ -44,7 +44,8 @@ async function run() {
     
                 await exec.exec('git', ['commit', '-m', 'Use  @vercel/ncc']);
                 
-
+                await git.addConfig('user.email', `${env.GITHUB_ACTOR}@users.noreply.github.com`)
+                await git.addConfig('user.name', env.GITHUB_ACTOR)
                 await git.push(`origin/${branch}`);
                 
             });
