@@ -28,6 +28,7 @@ async function run() {
         const distAlreadyExist = fs.existsSync(dir);
         const url = `${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}`.replace(/^https:\/\//, `https://x-access-token:${token}@`);
         console.log(`branch: ${branch}`)
+        await exec.exec('git', 'fetch', url)
         await exec.exec('git', 'checkout', branch)
         await exec.exec('git', ['pull', '--ff-only', url, `${branch}`]);
         await exec.exec('npm install');
