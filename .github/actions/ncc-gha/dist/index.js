@@ -20,8 +20,8 @@ async function run() {
     }
 
     try {
-        const url = `${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}`.replace(/^https:\/\//, `https://x-access-token:${token}@`);
-
+        const branch = github.context.payload.pull_request.head.ref;
+        await exec.exec('git', 'checkout', branch)
         await exec.exec('npm install');
         await exec.exec('npm i @vercel/ncc');
         await exec.exec('./node_modules/@vercel/ncc/dist/ncc/cli.js', ['build', mainFilePath, '--license', 'licenses.txt']);
@@ -32,8 +32,7 @@ async function run() {
 
         if (diff) {
             await core.group('push changes', async () => {
-                const branch = github.context.payload.pull_request.head.ref;
-                await exec.exec('git', ['checkout', 'HEAD', '-b', branch]);
+                // await exec.exec('git', ['checkout', 'HEAD', '-b', branch]);
 
                 const actor = env.GITHUB_ACTOR
                 await exec.exec('git', ['config', 'user.name', actor]);
@@ -43,7 +42,6 @@ async function run() {
                 await exec.exec('git', ['commit', '-m', 'Use  @vercel/ncc']);
                 const url = `${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}`.replace(/^https:\/\//, `https://x-access-token:${token}@`);
 
-                await exec.exec('git', ['pull', url, 'HEAD']);
                 await exec.exec('git', ['push', url, 'HEAD']);
 
             });
