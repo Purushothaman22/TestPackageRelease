@@ -41,11 +41,9 @@ async function run() {
         if (diff) {
             await core.group('push changes', async () => {
                 await exec.exec('git', ['add', './dist']);
-    
-                await exec.exec('git', ['commit', '-m', 'Use  @vercel/ncc']);
-                
                 await git.addConfig('user.email', `${env.GITHUB_ACTOR}@users.noreply.github.com`)
                 await git.addConfig('user.name', env.GITHUB_ACTOR)
+                await exec.exec('git', ['commit', '-m', 'Use  @vercel/ncc']);
                 await git.push(`origin/${branch}`);
                 
             });
