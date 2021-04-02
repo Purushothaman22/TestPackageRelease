@@ -21,6 +21,10 @@ async function run() {
 
     try {
         const branch = github.context.payload.pull_request.head.ref;
+        const fs = require('fs');
+
+        // directory to check if exists
+        const dir = './dist';
         await exec.exec('git', 'checkout', branch)
         await exec.exec('npm install');
         await exec.exec('npm i @vercel/ncc');
@@ -30,7 +34,7 @@ async function run() {
             'git', ['diff', '--quiet', './dist'], {ignoreReturnCode: true}
         );
 
-        if (diff) {
+        if (diff || !fs.existsSync(dir)) {
             await core.group('push changes', async () => {
                 // await exec.exec('git', ['checkout', 'HEAD', '-b', branch]);
 
