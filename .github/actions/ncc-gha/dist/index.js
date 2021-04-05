@@ -11,6 +11,7 @@ const github = __nccwpck_require__(5438)
 const simpleGit = __nccwpck_require__(1477);
 
 const env = process.env;
+const fs = require('fs');
 
 async function run() {
     const token = core.getInput('TOKEN');
