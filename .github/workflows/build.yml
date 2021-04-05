@@ -7,6 +7,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Check branch
         run: git branch
-      - uses: ./.github/actions/ncc-gha
+      - uses: Purushothaman22/ncc-gha@purushothaman/add-ncc-gh-action
         with:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
