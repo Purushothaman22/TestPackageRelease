@@ -1,0 +1,15 @@
+name: Buil Package
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build-package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Check branch
+        run: git branch
+      - uses: Purushothaman22/TestPackageRelease@master
+        with:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}

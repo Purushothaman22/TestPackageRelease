@@ -1,14 +1,12 @@
 {
-  "name": "@Purushothaman22/testpackagerelease",
-  "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "name": "testpackagerelease",
+  "version": "1.0.0",
+  "description": "\"Builds\" a JS GitHub Action into a `dist/index.js` using @vercel/ncc",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "main": "index.js",
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Purushothaman22/TestPackageRelease.git"
@@ -18,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/Purushothaman22/TestPackageRelease/issues"
   },
-  "homepage": "https://github.com/Purushothaman22/TestPackageRelease#readme"
+  "homepage": "https://github.com/Purushothaman22/TestPackageRelease#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/exec": "^1.0.4",
+    "@actions/github": "^4.0.0",
+    "@vercel/ncc": "^0.27.0",
+    "simple-git": "^2.37.0"
+  }
 }
