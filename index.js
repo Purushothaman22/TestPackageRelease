@@ -28,7 +28,6 @@ async function run() {
         await git.fetch('repo')
         await git.checkout(branch)
 
-        const distFolderAlreadyExists = fs.existsSync('./dist');
         await exec.exec('npm install');
         await exec.exec('npm i @vercel/ncc');
         await exec.exec('./node_modules/@vercel/ncc/dist/ncc/cli.js', ['build', mainFilePath, '--license', 'licenses.txt']);
@@ -39,7 +38,7 @@ async function run() {
             'git', ['diff', '--quiet'], {ignoreReturnCode: true}
         );
     
-        if (diff || !distFolderAlreadyExists) {
+        if (diff) {
             await core.group('push changes', async () => {
                 await git.addConfig('user.email', `${env.GITHUB_ACTOR}@users.noreply.github.com`)
                 await git.addConfig('user.name', env.GITHUB_ACTOR)
